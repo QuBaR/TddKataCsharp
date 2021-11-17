@@ -67,5 +67,22 @@ namespace PasswordVerifierTests
             Assert.AreEqual(passwordVerified, passwordShouldVerify);
         }
 
+
+        [DataRow("abcder1", true)]
+        [DataRow("abcder2A", true)]
+        [DataRow("ABCDERS", false)]
+        [TestMethod]
+        public void TestPasswordShouldHaveOneNumberAtLeast(string inputPassword, bool passwordShouldVerify)
+        {
+            // Arrange
+            var passwordVerifier = new PasswordVerifierEngine();
+
+            // Act
+            var passwordVerified = passwordVerifier.ShouldHaveOneNumberAtLeast(inputPassword);
+
+            // Assert
+            Assert.AreEqual(passwordVerified, passwordShouldVerify);
+        }
+
     }
 }

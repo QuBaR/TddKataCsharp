@@ -61,5 +61,20 @@ namespace PasswordVerifier
             }
             return false;
         }
+
+        public bool ShouldHaveOneNumberAtLeast(string inputPassword)
+        {
+            const int minDigits = 1;
+            var countOfDigits = 0;
+            for (var i = 0; i < inputPassword.Length; i++)
+            {
+                if (char.IsDigit(inputPassword, i))
+                {
+                    countOfDigits++;
+                    if (countOfDigits == minDigits) return true;
+                }
+            }
+            return false;
+        }
     }
 }
