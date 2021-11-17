@@ -36,5 +36,20 @@ namespace PasswordVerifierTests
             Assert.AreEqual(passwordVerified, passwordShouldVerify);
         }
 
+        [DataRow("abcder", false)]
+        [DataRow("abcderA", true)]
+        [TestMethod]
+        public void TestPasswordShouldHaveOneUppercaseLetterAtLeast(string inputPassword, bool passwordShouldVerify)
+        {
+            // Arrange
+            var passwordVerifier = new PasswordVerifierEngine();
+
+            // Act
+            var passwordVerified = passwordVerifier.ShouldHaveOneUppercaseLetterAtLeast(inputPassword);
+
+            // Assert
+            Assert.AreEqual(passwordVerified, passwordShouldVerify);
+        }
+
     }
 }

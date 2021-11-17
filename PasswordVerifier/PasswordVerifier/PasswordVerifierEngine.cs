@@ -33,5 +33,20 @@ namespace PasswordVerifier
             }
             return false;
         }
+
+        public bool ShouldHaveOneUppercaseLetterAtLeast(string inputPassword)
+        {
+            const int minUppercase = 1;
+            var countOfUppercase = 0;
+            for (var i = 0; i < inputPassword.Length; i++)
+            {
+                if (char.IsUpper(inputPassword, i))
+                {
+                    countOfUppercase++;
+                    if (countOfUppercase == minUppercase) return true;
+                }
+            }
+            return false;
+        }
     }
 }
