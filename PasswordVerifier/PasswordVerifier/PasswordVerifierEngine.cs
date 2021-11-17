@@ -1,16 +1,15 @@
 ﻿using System;
+using System.Linq;
+using static System.String;
 
 namespace PasswordVerifier
 {
     public class PasswordVerifierEngine
     {
-        public PasswordVerifierEngine()
-        {
-        }
-
         public bool Verify(string userInputPassword)
         {
-            if (IsMinLength(userInputPassword))
+            if (ContainsNullOrWhiteSpace(userInputPassword) && 
+                IsMinLength(userInputPassword))
             {
                 Console.WriteLine("Your password has been accepted.");
                 return true;
@@ -19,10 +18,20 @@ namespace PasswordVerifier
             return false;
         }
 
-        public static bool IsMinLength(string userInputPassword)
+        public bool IsMinLength(string userInputPassword)
         {
             const int minLength = 9;
             return userInputPassword.Length >= minLength;
+        }
+
+        public bool ContainsNullOrWhiteSpace(string userInputPassword)
+        {
+            if (IsNullOrWhiteSpace(userInputPassword)) return true;
+            for (int i = 0; i < userInputPassword.Length; i++)
+            {
+                if (char.IsWhiteSpace(userInputPassword, i)) return true;
+            }
+            return false;
         }
     }
 }

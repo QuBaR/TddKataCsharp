@@ -6,17 +6,35 @@ namespace PasswordVerifierTests
     [TestClass]
     public class PasswordVerifierTests
     {
+        [DataRow("1234qwert",true)]
+        [DataRow("1234qwer",false)]
         [TestMethod]
-        public void TestPasswordShouldBeLargerThan8chars()
+        public void TestPasswordLargerThenEightCharacters(string inputPassword, bool passwordShouldVerify)
         {
             // Arrange
             var passwordVerifier = new PasswordVerifierEngine();
 
             // Act
-            var passwordVerified = passwordVerifier.Verify("qwer12345");
+            var passwordVerified = passwordVerifier.IsMinLength(inputPassword);
 
             // Assert
-            Assert.IsTrue(passwordVerified);
+            Assert.AreEqual(passwordVerified, passwordShouldVerify);
         }
+
+        [DataRow("1", true)]
+        [DataRow(null, false)]
+        [TestMethod]
+        public void TestPasswordNotNull(string inputPassword, bool passwordShouldVerify)
+        {
+            // Arrange
+            var passwordVerifier = new PasswordVerifierEngine();
+
+            // Act
+            var passwordVerified = !passwordVerifier.ContainsNullOrWhiteSpace(inputPassword);
+
+            // Assert
+            Assert.AreEqual(passwordVerified, passwordShouldVerify);
+        }
+
     }
 }
