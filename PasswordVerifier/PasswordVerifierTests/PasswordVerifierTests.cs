@@ -12,10 +12,9 @@ namespace PasswordVerifierTests
         public void TestPasswordLargerThenEightCharacters(string inputPassword, bool passwordShouldVerify)
         {
             // Arrange
-            var passwordVerifier = new PasswordVerifierEngine();
 
             // Act
-            var passwordVerified = passwordVerifier.IsMinLength(inputPassword);
+            var passwordVerified = PasswordVerifierEngine.IsMinLength(inputPassword);
 
             // Assert
             Assert.AreEqual(passwordVerified, passwordShouldVerify);
@@ -27,10 +26,9 @@ namespace PasswordVerifierTests
         public void TestPasswordNotNull(string inputPassword, bool passwordShouldVerify)
         {
             // Arrange
-            var passwordVerifier = new PasswordVerifierEngine();
 
             // Act
-            var passwordVerified = !passwordVerifier.ContainsNullOrWhiteSpace(inputPassword);
+            var passwordVerified = !PasswordVerifierEngine.ContainsNullOrWhiteSpace(inputPassword);
 
             // Assert
             Assert.AreEqual(passwordVerified, passwordShouldVerify);
@@ -42,10 +40,9 @@ namespace PasswordVerifierTests
         public void TestPasswordShouldHaveOneUppercaseLetterAtLeast(string inputPassword, bool passwordShouldVerify)
         {
             // Arrange
-            var passwordVerifier = new PasswordVerifierEngine();
 
             // Act
-            var passwordVerified = passwordVerifier.ShouldHaveOneUppercaseLetterAtLeast(inputPassword);
+            var passwordVerified = PasswordVerifierEngine.IsMinUppercase(inputPassword);
 
             // Assert
             Assert.AreEqual(passwordVerified, passwordShouldVerify);
@@ -58,10 +55,9 @@ namespace PasswordVerifierTests
         public void TestPasswordShouldHaveOneLowercaseLetterAtLeast(string inputPassword, bool passwordShouldVerify)
         {
             // Arrange
-            var passwordVerifier = new PasswordVerifierEngine();
 
             // Act
-            var passwordVerified = passwordVerifier.ShouldHaveOneLowercaseLetterAtLeast(inputPassword);
+            var passwordVerified = PasswordVerifierEngine.IsMinLowercase(inputPassword);
 
             // Assert
             Assert.AreEqual(passwordVerified, passwordShouldVerify);
@@ -75,10 +71,9 @@ namespace PasswordVerifierTests
         public void TestPasswordShouldHaveOneNumberAtLeast(string inputPassword, bool passwordShouldVerify)
         {
             // Arrange
-            var passwordVerifier = new PasswordVerifierEngine();
 
             // Act
-            var passwordVerified = passwordVerifier.ShouldHaveOneNumberAtLeast(inputPassword);
+            var passwordVerified = PasswordVerifierEngine.IsMinDigits(inputPassword);
 
             // Assert
             Assert.AreEqual(passwordVerified, passwordShouldVerify);

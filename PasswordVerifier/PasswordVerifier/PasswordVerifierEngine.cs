@@ -6,25 +6,34 @@ namespace PasswordVerifier
 {
     public class PasswordVerifierEngine
     {
-        public bool Verify(string userInputPassword)
+
+        public static bool Verify(string userInputPassword)
         {
-            if (ContainsNullOrWhiteSpace(userInputPassword) && 
-                IsMinLength(userInputPassword))
+            if (!ContainsNullOrWhiteSpace(userInputPassword) && IsMinLength(userInputPassword) && IsMinUppercase(userInputPassword) && IsMinLowercase(userInputPassword) && IsMinDigits(userInputPassword))
             {
-                Console.WriteLine("Your password has been accepted.");
+                Console.WriteLine("\nYour password has been accepted.");
                 return true;
             }
-            Console.WriteLine("Please try again.");
-            return false;
+            else
+            {
+                Console.WriteLine("\nYour password is invalid because:");
+                if (ContainsNullOrWhiteSpace(userInputPassword)) Console.WriteLine("\t- Your password may not contain white space.");
+                if (!IsMinLength(userInputPassword)) Console.WriteLine("\t- Your password must be at least nine characters long.");
+                if (!IsMinUppercase(userInputPassword)) Console.WriteLine("\t- Your password must contain at least one uppercase letter.");
+                if (!IsMinLowercase(userInputPassword)) Console.WriteLine("\t- Your password must contain at least one lowercase letter.");
+                if (!IsMinDigits(userInputPassword)) Console.WriteLine("\t- Your password must contain at least one digit.");
+                Console.WriteLine("Please try again.");
+                return false;
+            }
         }
 
-        public bool IsMinLength(string userInputPassword)
+        public static bool IsMinLength(string userInputPassword)
         {
             const int minLength = 9;
             return userInputPassword.Length >= minLength;
         }
 
-        public bool ContainsNullOrWhiteSpace(string userInputPassword)
+        public static bool ContainsNullOrWhiteSpace(string userInputPassword)
         {
             if (IsNullOrWhiteSpace(userInputPassword)) return true;
             for (int i = 0; i < userInputPassword.Length; i++)
@@ -34,7 +43,7 @@ namespace PasswordVerifier
             return false;
         }
 
-        public bool ShouldHaveOneUppercaseLetterAtLeast(string inputPassword)
+        public static bool IsMinUppercase(string inputPassword)
         {
             const int minUppercase = 1;
             var countOfUppercase = 0;
@@ -49,7 +58,7 @@ namespace PasswordVerifier
             return false;
         }
 
-        public bool ShouldHaveOneLowercaseLetterAtLeast(string inputPassword)
+        public static bool IsMinLowercase(string inputPassword)
         {
             const int minLowercase = 1;
             var countOfLowercase = 0;
@@ -62,7 +71,7 @@ namespace PasswordVerifier
             return false;
         }
 
-        public bool ShouldHaveOneNumberAtLeast(string inputPassword)
+        public static bool IsMinDigits(string inputPassword)
         {
             const int minDigits = 1;
             var countOfDigits = 0;
