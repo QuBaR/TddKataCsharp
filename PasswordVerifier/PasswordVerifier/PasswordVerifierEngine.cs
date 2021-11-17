@@ -8,9 +8,21 @@ namespace PasswordVerifier
         {
         }
 
-        public object Verify(string v)
+        public bool Verify(string userInputPassword)
         {
-            throw new NotImplementedException();
+            if (IsMinLength(userInputPassword))
+            {
+                Console.WriteLine("Your password has been accepted.");
+                return true;
+            }
+            Console.WriteLine("Please try again.");
+            return false;
+        }
+
+        public static bool IsMinLength(string userInputPassword)
+        {
+            const int minLength = 9;
+            return userInputPassword.Length >= minLength;
         }
     }
 }
