@@ -48,5 +48,18 @@ namespace PasswordVerifier
             }
             return false;
         }
+
+        public bool ShouldHaveOneLowercaseLetterAtLeast(string inputPassword)
+        {
+            const int minLowercase = 1;
+            var countOfLowercase = 0;
+            for (var i = 0; i < inputPassword.Length; i++)
+            {
+                if (!char.IsLower(inputPassword, i)) continue;
+                countOfLowercase++;
+                if (countOfLowercase == minLowercase) return true;
+            }
+            return false;
+        }
     }
 }
